@@ -1,4 +1,8 @@
-# Virtual Environment
+# Secrets
+.env
+.env.local
+
+# Virtual Environments
 tm-env/
 
 info.txt
