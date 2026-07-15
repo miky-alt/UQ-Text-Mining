@@ -1,0 +1,33 @@
+dataset,sample_id,answer_key,generated_text,predicted_letter,correct,Linguistic-1S,EigLaplacian,UQLM-Entailment,MSP,MeanTokenEntropy,Mahalanobis
+MedQA,0,B," B
+Explanation: 
+The patient presents with classic symptoms of sickle cell disease, including jaundice, anemia, bone pai",B,1,,0.9999998658895501,0.3985740542411804,0.016192222014069557,0.027629228308796883,
+MedQA,1,C," C 
+
+
+**Explanation:**
+
+The patient's symptoms align strongly with Posttraumatic Stress Disorder (PTSD). Here's why:
+
+* ",C,1,,1.0000001639127738,1.0,0.002416021889075637,0.005133479833602905,
+MedQA,2,B," **B**
+
+Explanation: 
+The patient presents with classic symptoms of a urinary retention, including urinary incontinence,",B,1,,2.9380827565384156,0.8008161783218384,0.6407092213630676,0.41245898604393005,
+MedQA,3,C," A
+Explanation: 
+
+The patient presented with sudden-onset dyspnea, tachycardia, and a history of deep vein thrombosis (D",A,0,,1.0000000149011619,0.34526166319847107,0.03864266350865364,0.05776730179786682,
+MedQA,4,B," D
+Explanation: 
+The patient presents with classic symptoms of neonatal jaundice, including scleral icterus, pale stools",D,0,,0.9999998658895501,0.6964582026004791,0.012304593808948994,0.021505877375602722,
+MMLU-Medical,0,B," B. 
+",B,1,,0.9999998658895501,0.9825104475021362,0.03997591510415077,0.05580352991819382,
+MMLU-Medical,1,C," A 
+",A,0,,1.0000000149011619,0.20850500464439392,0.033383067697286606,0.04512408748269081,
+MMLU-Medical,2,D," D 
+",D,1,,0.9999998658895501,1.0,0.006688200868666172,0.013153577223420143,
+MMLU-Medical,3,C," C 
+",C,1,,1.0000001639127738,1.0,0.0022909813560545444,0.004937630146741867,
+MMLU-Medical,4,B," B 
+",B,1,,0.9999998658895501,1.0,0.003618562826886773,0.007644656114280224,

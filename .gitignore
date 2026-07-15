@@ -12,4 +12,4 @@ info.txt
 
 # Python cache
 __pycache__/
-*.pyc
+*.pycnotebooks/cache/
