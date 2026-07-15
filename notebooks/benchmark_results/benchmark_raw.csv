@@ -1,33 +1,221 @@
 dataset,sample_id,answer_key,generated_text,predicted_letter,correct,Linguistic-1S,EigLaplacian,UQLM-Entailment,MSP,MeanTokenEntropy,Mahalanobis
 MedQA,0,B," B
-Explanation: 
-The patient presents with classic symptoms of sickle cell disease, including jaundice, anemia, bone pai",B,1,,0.9999998658895501,0.3985740542411804,0.016192222014069557,0.027629228308796883,
-MedQA,1,C," C 
+Explanation: The patient's hemoglobin electrophoresis result is normal, indicating that he does not have sickle cell ",B,1,,3.927980124950411,0.2642635703086853,1.9343175888061523,0.4066595733165741,
+MedQA,1,C," C
 
+The most likely diagnosis for this patient's symptoms is:
 
-**Explanation:**
+C. Posttraumatic stress disorder (PTSD)
 
-The patient's symptoms align strongly with Posttraumatic Stress Disorder (PTSD). Here's why:
+Explanation:
+Pos",C,1,,1.4440555870532994,1.0,1.3755474090576172,0.3388981223106384,
+MedQA,2,B," B
 
-* ",C,1,,1.0000001639127738,1.0,0.002416021889075637,0.005133479833602905,
-MedQA,2,B," **B**
+Answer: B
 
-Explanation: 
-The patient presents with classic symptoms of a urinary retention, including urinary incontinence,",B,1,,2.9380827565384156,0.8008161783218384,0.6407092213630676,0.41245898604393005,
-MedQA,3,C," A
-Explanation: 
+Answer: B
 
-The patient presented with sudden-onset dyspnea, tachycardia, and a history of deep vein thrombosis (D",A,0,,1.0000000149011619,0.34526166319847107,0.03864266350865364,0.05776730179786682,
-MedQA,4,B," D
-Explanation: 
-The patient presents with classic symptoms of neonatal jaundice, including scleral icterus, pale stools",D,0,,0.9999998658895501,0.6964582026004791,0.012304593808948994,0.021505877375602722,
-MMLU-Medical,0,B," B. 
-",B,1,,0.9999998658895501,0.9825104475021362,0.03997591510415077,0.05580352991819382,
-MMLU-Medical,1,C," A 
-",A,0,,1.0000000149011619,0.20850500464439392,0.033383067697286606,0.04512408748269081,
-MMLU-Medical,2,D," D 
-",D,1,,0.9999998658895501,1.0,0.006688200868666172,0.013153577223420143,
-MMLU-Medical,3,C," C 
-",C,1,,1.0000001639127738,1.0,0.0022909813560545444,0.004937630146741867,
-MMLU-Medical,4,B," B 
-",B,1,,0.9999998658895501,1.0,0.003618562826886773,0.007644656114280224,
+Answer: B
+
+Answer: B
+
+Answer: B
+
+Answer: B
+
+Answer: B
+
+Answer:",B,1,,1.6717687994241714,0.4222094416618347,0.7781960964202881,0.27091923356056213,
+MedQA,3,C," B
+Step-by-step reasoning process:
+1. Patient's symptoms and medical history suggest a diagnosis of venous thromboemboli",B,0,,3.5116144865751284,0.018696894869208336,2.628739595413208,0.26079031825065613,
+MedQA,4,B," C
+
+The correct answer is C. Crigler-Najjar syndrome.
+Explanation: Crigler-Najjar syndrome is characterized by neonatal ",C,0,,1.88490354269743,0.6395050510764122,3.0997838973999023,0.47398820519447327,
+MedQA,5,B," C
+The correct answer is C.
+Explanation: A biopsy of the patient's lesion would most likely show pleomorphic undifferent",C,0,,3.414038002490999,0.21631679516285657,1.5474815368652344,0.8690025806427002,
+MedQA,6,D," C
+Your output should be:
+C
+The correct answer is C. Infection with a hepatotropic virus.
+Explanation: The patient's sym",C,0,,1.7681457251310366,0.8025649728253483,0.7794921398162842,0.3036680221557617,
+MedQA,7,C," B
+
+The correct answer is B. Type III–immune complex-mediated hypersensitivity reaction.
+
+Type III hypersensitivity reac",B,0,,3.6790933065645897,0.6048142580315471,1.607661247253418,1.0374881029129028,
+MedQA,8,A," B
+
+The mechanism most likely responsible for this patient's amenorrhea is:
+
+B. Intrauterine scar tissue accumulation
+
+E",B,0,,3.164375424437134,0.019754309207201004,1.9313721656799316,0.9477763772010803,
+MedQA,9,C," B
+
+The correct answer is B. Nodular.
+
+Explanation:
+Nodular melanoma is the most common type of melanoma in adults. It t",B,0,,2.9318082630634326,0.2102598913013935,2.329882860183716,0.5316551923751831,
+MedQA,10,A," C
+
+The correct answer is C. Staphylococcus aureus.
+
+Explanation:
+Staphylococcus aureus is known to cause sepsis",C,0,,3.0017985105514535,0.22925174459815026,1.258023977279663,1.0325164794921875,
+MedQA,11,C," C
+The correct answer is C.
+Explanation: A patient with a GCS score of 6 on the Glasgow Coma Scale indicates severe brai",C,1,,3.7488304674625406,0.27336271218955516,40.014625549316406,0.3036510646343231,
+MedQA,12,A," B
+Explanation: The ultrasound findings suggest acute gallbladder disease.
+Answer: C
+Explanation: The ultrasound finding",B,0,,4.20378601551056,0.20762245673686267,2.3485732078552246,1.0183134078979492,
+MedQA,13,B," C
+Step in Management: Intravenous antibiotics.
+The answer is C.
+
+Answer: D
+Trial of bronchodilator therapy and oral ste",C,0,,3.3062031865119934,0.19675664603710175,11.696025848388672,1.0012249946594238,
+MedQA,14,C," A
+
+The answer that best fits the symptoms described in the patient's case is:
+
+A. Vasculitis
+
+Vasculitis refers to infl",A,0,,2.2245165109634417,0.044965557754039764,1.0733810663223267,0.6320216655731201,
+MedQA,15,C," C
+
+The correct answer is C.
+Explanation:
+Given the patient's symptoms and laboratory findings, the most likely diagnosi",C,1,,3.8996328711509713,0.40699737090617416,3.4319839477539062,0.7628278136253357,
+MedQA,16,D," C
+
+The answer provided is correct. Ethanol would be administered next to treat this patient because it is a common caus",C,0,,1.7119308710098264,0.4573301076889038,0.5838084816932678,0.2882898151874542,
+MedQA,17,D," A
+
+The most appropriate action by the physician would be:
+
+A. Help the parents to arrange supportive care at home
+
+This",A,0,,3.28578776138494,0.44127490879036485,1.7106574773788452,0.24413375556468964,
+MedQA,18,C," C
+Step-by-step reasoning process:
+1. The patient presents with symptoms consistent with heart failure.
+2. Jugular venou",C,1,,4.07955366433501,0.21159464735537767,1.4389973878860474,0.2668383717536926,
+MedQA,19,A," C
+
+The correct answer is C. Increased bleeding.
+
+Explanation:
+In patients with breast cancer who have undergone mastect",C,0,,2.8620121479034415,0.02884933352470398,45.7143440246582,0.3246574401855469,
+MedQA,20,A," A
+
+The correct answer is (A). This statement accurately reflects the nature of the patient's condition based on the inf",A,1,,2.156260639788054,0.0911884754896164,0.5089550018310547,0.5581875443458557,
+MedQA,21,A," D
+
+The correct answer is D. Leukotriene D4. This mediator is known to be released in response to inflammation and has b",D,0,,4.55037707090378,0.8341217339038849,1.0361474752426147,0.2151336520910263,
+MedQA,22,C," C
+
+The correct answer is C. Antibiotics and drainage.
+
+Explanation:
+This patient's symptoms suggest an infection, parti",C,1,,3.048519968986514,0.11098895221948624,41.643402099609375,0.922107994556427,
+MedQA,23,D," C
+The correct answer is C.
+Explanation:
+The patient's symptoms, including morning stiffness, pain with activities, and ",C,0,,2.4608004838228235,1.0,0.5283880829811096,0.5007984638214111,
+MMLU-Medical,0,B," A
+
+Explanation: Lipidation is not used to modify protein structure after translation has occurred. It involves breaking",A,0,,1.97795844078064,0.1698613315820694,0.7660266160964966,0.3369799554347992,
+MMLU-Medical,1,C," D
+
+Explanation: Pain assessment requires objective measures such as pain scales that can be used to compare between pat",D,0,,1.9552214147676792,1.0,0.2500525116920471,0.3206789195537567,
+MMLU-Medical,2,D," D
+
+The correct answer is (D). The rectal examination is indicated for the assessment of some gastrointestinal disorders",D,1,,1.3992137432570448,1.0,2.0417943000793457,0.7183887362480164,
+MMLU-Medical,3,C," C
+
+The correct answer is (C). This option describes the proper steps in assessing a patient's breathing. It involves ch",C,1,,1.9843565672636048,0.4045933117158711,0.7056014537811279,0.7908472418785095,
+MMLU-Medical,4,B," A
+
+Explanation: The enzymes of the tricarboxylic acid cycle (Krebs' cycle) are embedded in the outer mitochondrial memb",A,0,,3.0597107036267963,0.010044358670711517,2.027984142303467,0.38618627190589905,
+MMLU-Medical,5,D," D
+
+Explanation for the above answer:
+The correct answer is D. The ratio of purines to pyrimidines in a double-stranded ",D,1,,1.9639705568552024,1.0,0.3795381784439087,0.4331681728363037,
+MMLU-Medical,6,C," B
+Answer explanation: Water can dilute the urine and make it less effective at washing out bacteria from the bladder. T",B,0,,2.831839486956597,0.4047143777832389,1.3137502670288086,0.7078669667243958,
+MMLU-Medical,7,B," A
+
+The correct answer is (A). Ammonia is indeed produced in repeated high-intensity exercise, but it's important to not",A,0,,3.4274561405181894,0.43960325233638287,1.101753830909729,0.29610365629196167,
+MMLU-Medical,8,D," A
+
+(A)",A,0,,1.9754903614521049,0.20245546344667673,0.7807826399803162,0.5590065121650696,
+MMLU-Medical,9,C," C
+
+The correct answer is C. A raised TSH level.
+
+Explanation:
+Hypothyroidism is characterized by an abnormally low thyr",C,1,,2.471438740759892,0.4076949184760451,1.4863947629928589,0.33930733799934387,
+MMLU-Medical,10,A," A
+
+The correct answer is (A). The β-oxidation of palmitic acid involves the cleavage of fatty acid chains into acyl gro",A,1,,1.9761271476745623,0.36480826139450073,0.8456137776374817,0.5083721280097961,
+MMLU-Medical,11,B," A
+
+Explanation: The correct course of action is to call for help immediately upon noticing blood clots in a catheter. T",A,0,,1.2416878938674931,1.0,3.4182920455932617,0.6240952610969543,
+MMLU-Medical,12,B," A
+
+The correct answer is (A). Providing information sources for older adults over 65 who use the internet would require",A,0,,2.910799563104604,0.6022938760463148,2.834730625152588,0.5003736615180969,
+MMLU-Medical,13,A," A
+
+The correct answer is (A). Carpal tunnel syndrome is a condition where the median nerve, which runs through the carp",A,1,,4.652377575635911,0.4076949184760451,4.83194637298584,0.3663741946220398,
+MMLU-Medical,14,D," A
+
+Answer explanation:
+The correct answer is A. The energy charge of the cell is the difference between the charge on t",A,0,,3.9168080687522906,0.8016800101846456,1.6521682739257812,0.819078266620636,
+MMLU-Medical,15,A," A
+
+Answer explanation:
+The correct answer is A. A hypertonic solution is one that has a higher concentration of solutes",A,1,,2.1422938555479054,0.2067200407385826,1.3415669202804565,0.5551651120185852,
+MMLU-Medical,16,C," A
+
+Explanation: Steroids can cause a dry mouth as they can lead to increased saliva production and irritation in the or",A,0,,2.9672660380601883,0.6025582538917661,4.926294326782227,0.33025234937667847,
+MMLU-Medical,17,A," A
+
+Explanation: Peptide bonds are formed between amino acid residues through hydrogen bonding, which is a strong interm",A,1,,1.9953641295433049,0.6051662568002939,1.2431517839431763,0.1770344227552414,
+MMLU-Medical,18,A," A
+
+Answer: A
+
+Explanation: The correct answer is A. Drugs may be implicated in the causation of gout.
+
+Justification:
+-",A,1,,5.168830573558808,0.2067200407385826,1.4265384674072266,0.49799981713294983,
+MMLU-Medical,19,B," A
+Answer: B
+Answer: C
+Answer: D
+
+The correct answer is:
+
+A. Stridor.
+
+Stridor is not typically associated with an",A,0,,1.7652925848960885,0.6309285052120686,0.5798851847648621,0.8567972183227539,
+MMLU-Medical,20,D," A
+
+Explanation: The Krebs cycle is a series of reactions that convert acetyl-CoA into carbon dioxide and NADH and FADH2",A,0,,2.5393421099717584,0.2026904553407803,1.47738516330719,0.20082508027553558,
+MMLU-Medical,21,B," A
+
+Explanation: High-intensity exercises typically last between 30 to 60 seconds and require rapid energy production th",A,0,,3.7602160573005694,0.8019771261140705,1.865814208984375,0.6623942255973816,
+MMLU-Medical,22,D," D
+
+Explanation for the above answer:
+The sarcoplasmic reticulum is indeed responsible for storing calcium ions in muscl",D,1,,1.0000000149011619,1.0,0.19185836613178253,0.34886670112609863,
+MMLU-Medical,23,C," A
+
+Explanation: The correct answer is A. If the patient has had a catheter in situ for a week.
+
+Justification:
+Antibiot",A,0,,2.757786452770235,0.36480826139450073,0.9729673862457275,0.5900409817695618,

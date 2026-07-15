@@ -12,4 +12,8 @@ info.txt
 
 # Python cache
 __pycache__/
-*.pycnotebooks/cache/
+*.pyc
+
+# Regenerable UQ background caches 
+notebooks/cache/
+cache/
