@@ -1,4 +1,8 @@
-# Virtual Environment
+# Secrets
+.env
+.env.local
+
+# Virtual Environments
 tm-env/
 
 info.txt
@@ -9,3 +13,7 @@ info.txt
 # Python cache
 __pycache__/
 *.pyc
+
+# Regenerable UQ background caches 
+notebooks/cache/
+cache/
