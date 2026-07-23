@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uq_toolbox"
+version = "0.1.0"
+description = "Uncertainty Quantification Toolbox"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    # Aggiungi qui le dipendenze principali se necessario (es. pandas, torch, ecc.)
+]
+
+[tool.setuptools.packages.find]
+include = ["uq_toolbox*"]
