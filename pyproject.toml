@@ -9,8 +9,8 @@ description = "Uncertainty Quantification Toolbox for Text Mining"
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
-    # Aggiungi qui le tue dipendenze principali (es. transformers, datasets, torch, ecc.)
+    # Aggiungi qui le tue dipendenze principali (es. transformers, datasets, torch)
 ]
 
-[tool.setuptools.packages.find]
-include = ["uq_toolbox*"]
+[tool.setuptools]
+packages = ["uq_toolbox", "uq_toolbox.core", "uq_toolbox.data", "uq_toolbox.managers"]
