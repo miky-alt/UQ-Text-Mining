@@ -534,21 +534,20 @@ def list_uq_techniques(
 ):
     """
     Query interface for uncertainty techniques. 
-    Filters and displays the registry contents.
+    Filters and displays the registry contents including descriptions.
     """
     print("\n🔍 UQ FRAMEWORK CORE ENGINE - METHOD TAXONOMY AND HARDWARE COST ANALYSIS")
 
-    header = f"{'TECHNIQUE':<35} | {'LIBRARY':<12} | {'MODE':<6} | {'CATEGORY':<20} | {'TRAIN':<5} | {'COMPUTE'}"
-    separator = "=" * 110
+    # Linea separatrice estesa per accogliere la colonna della descrizione
+    separator = "=" * 160
+    header = f"{'TECHNIQUE':<35} | {'LIBRARY':<12} | {'MODE':<6} | {'CATEGORY':<20} | {'TRAIN':<5} | {'COMPUTE':<8} | {'DESCRIPTION'}"
 
     print(separator)
     print(header)
     print(separator)
 
     count = 0
-    # Iteriamo sulla struttura annidata
     for lib_enum, techniques in UQ_REGISTRY.items():
-        # Filtro libreria (se l'utente passa un enum o una stringa)
         if library and lib_enum != library:
             continue
             
@@ -557,6 +556,7 @@ def list_uq_techniques(
             cat = info.get("category", "General")
             comp = info.get("compute", "Low")
             train = "Yes" if info.get("need_training", False) else "No"
+            desc = info.get("description", "No description available.")
             
             # --- Filtri ---
             if mode and req_mode.lower() != mode.lower(): continue
@@ -564,8 +564,8 @@ def list_uq_techniques(
             if need_training is not None and info.get("need_training", False) != need_training: continue
             if category and category.lower() not in cat.lower(): continue
             
-            # Stampa (tech_name non ha più il prefisso)
-            print(f"{tech_name:<35} | {lib_enum.value:<12} | {req_mode:<6} | {cat:<20} | {train:<5} | {comp}")
+            # Stampa riga con inclusione della descrizione
+            print(f"{tech_name:<35} | {lib_enum.value:<12} | {req_mode:<6} | {cat:<20} | {train:<5} | {comp:<8} | {desc}")
             count += 1
 
     print(separator)
