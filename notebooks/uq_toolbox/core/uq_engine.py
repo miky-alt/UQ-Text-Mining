@@ -31,6 +31,8 @@ from uqlm import (
 
 from ..registry import UQ_REGISTRY
 
+from ..registry import UQLibrary
+
 
 
 # =====================================================================
@@ -382,39 +384,50 @@ async def evaluate_uncertainty(
     image_path: Optional[str] = None,
     image_base64: Optional[str] = None,
     model_alias: str = "default",
+    library: Optional[Union[str, UQLibrary]] = None,  
     **kwargs
 ) -> Union[dict, List[dict]]:
     """
     Unified entry point for uncertainty quantification executions.
-    Validates the requested technique, performs fallback alias election, and
-    dispatches to the correct framework library backend.
-
-    Args:
-        prompt: Single target text query or list of queries.
-        technique_name: Identifier of the target UQ metric.
-        granularity: Text resolution target ('token' or 'sequence').
-        uq_context: Unified master context holding loaded models.
-        image_path: Optional local path to a target diagnostic image.
-        image_base64: Optional base64 representation of the input image.
-        model_alias: Identifier of the specific model backbone to execute. Default is "default".
-        **kwargs: Downstream metric hyperparameter overrides.
-
-    Returns:
-        Union[dict, List[dict]]: The raw text response and compiled uncertainty metrics.
+    Performs smart lookup across libraries, handling potential name collisions.
     """
-    if technique_name not in UQ_REGISTRY:
-        raise ValueError(f"The requested technique '{technique_name}' is not registered inside UQ_REGISTRY.")
+    found_lib = None
+    tech_info = None
 
-    tech_info = UQ_REGISTRY[technique_name]
+    # --- 1. Smart Lookup & Disambiguation Logic ---
+    if library:
+        # Normalizzazione dell'input della libreria (può essere l'Enum o la stringa es. "uqlm")
+        lib_enum = library if isinstance(library, UQLibrary) else next((l for l in UQLibrary if l.value == library), None)
+        if lib_enum and lib_enum in UQ_REGISTRY and technique_name in UQ_REGISTRY[lib_enum]:
+            found_lib = lib_enum
+            tech_info = UQ_REGISTRY[lib_enum][technique_name]
+    else:
+        # Ricerca automatica della tecnica in tutte le librerie registrate
+        matches = []
+        for lib_enum, techniques in UQ_REGISTRY.items():
+            if technique_name in techniques:
+                matches.append((lib_enum, techniques[technique_name]))
+        
+        if len(matches) == 1:
+            found_lib, tech_info = matches[0]
+        elif len(matches) > 1:
+            # ⚠️ Gestione dell'Omonimia: Esiste lo stesso nome in più librerie!
+            available_libs = [m[0].value for m in matches]
+            raise ValueError(
+                f"❌ Ambiguity Error: The technique '{technique_name}' is present in multiple libraries ({available_libs}). "
+                f"Please specify the 'library' parameter (e.g., library=UQLibrary.POLYGRAPH or library='uqlm')."
+            )
 
-    # --- ROUTING TO LM_POLYGRAPH ---
-    if tech_info["library"] == "lm_polygraph":
+    if not tech_info or not found_lib:
+        raise ValueError(f"❌ The requested technique '{technique_name}' is not registered inside UQ_REGISTRY.")
+
+    # --- 2. Routing basato sulla libreria identificata ---
+    if found_lib == UQLibrary.POLYGRAPH:
         if isinstance(prompt, list):
             raise NotImplementedError(
                 "The lm_polygraph processing wrapper currently supports single-prompt executions only."
             )
 
-        # Fallback election: if default is chosen but not declared, route to the only loaded model
         if model_alias == "default" and "default" not in uq_context.polygraph_models:
             available_models = list(uq_context.polygraph_models.keys())
             if len(available_models) == 1:
@@ -430,9 +443,7 @@ async def evaluate_uncertainty(
             **kwargs
         )
 
-    # --- ROUTING TO UQLM ---
-    elif tech_info["library"] == "uqlm":
-        # Fallback election: if default is chosen but not declared, route to the only loaded LLM
+    elif found_lib == UQLibrary.UQLM:
         if model_alias == "default" and "default" not in uq_context.langchain_llms:
             available_models = list(uq_context.langchain_llms.keys())
             if len(available_models) == 1:
