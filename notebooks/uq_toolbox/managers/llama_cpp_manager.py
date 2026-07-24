@@ -3,8 +3,8 @@ import requests
 import subprocess
 import time
 import shutil
-import glob
 import logging
+from huggingface_hub import hf_hub_download
 
 # Configure logger for professional output
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -12,12 +12,12 @@ logger = logging.getLogger("LlamaCppManager")
 
 class LlamaCppManager:
     """
-    Unified controller for llama.cpp service lifecycle.
-    Operates via local binary execution with secure process management.
+    Unified controller for llama.cpp service lifecycle with autonomous 
+    GGUF weight downloading via explicit Hugging Face repo_id and filename.
     """
     def __init__(self, 
                  base_url: str = "http://localhost:11434", 
-                 models_dir: str = "./models",
+                 cache_dir: str = "/tmp/llama_cache",
                  binary_path: str = "./bin/llama-server",
                  log_path: str = "./llama.log",
                  binary_url: str = "https://github.com/ggml-org/llama.cpp/releases/download/b10069/llama-b10069-bin-ubuntu-x64.tar.gz"):
@@ -25,13 +25,13 @@ class LlamaCppManager:
         # Configuration attributes
         self.base_url = base_url.strip().rstrip("/")
         self.port = self.base_url.split(":")[-1] if ":" in self.base_url else "11434"
-        self.models_dir = os.path.abspath(models_dir)
+        self.cache_dir = os.path.abspath(cache_dir)
         self.binary_url = binary_url
         self.binary_path = os.path.abspath(binary_path)
         self.log_path = os.path.abspath(log_path)
         
-        # Ensure working directories exist
-        os.makedirs(self.models_dir, exist_ok=True)
+        # Ensure cache and binary directories exist
+        os.makedirs(self.cache_dir, exist_ok=True)
         os.makedirs(os.path.dirname(self.binary_path), exist_ok=True)
 
     def is_running(self) -> bool:
@@ -65,7 +65,7 @@ class LlamaCppManager:
             os.makedirs(extract_root)
             subprocess.run(["tar", "-xzf", temp_tar, "-C", extract_root], check=True)
             
-            # 3. Locate and move the binary (Recursive search in extracted files)
+            # 3. Locate and move the binary
             found = False
             for root, dirs, files in os.walk(extract_root):
                 if "llama-server" in files:
@@ -83,7 +83,6 @@ class LlamaCppManager:
             if not found:
                 raise FileNotFoundError("Binary 'llama-server' not found in the downloaded archive.")
 
-            # Set execution permissions
             os.chmod(self.binary_path, 0o755)
             logger.info("✅ Binary successfully deployed.")
             return True
@@ -109,7 +108,6 @@ class LlamaCppManager:
             "--n-gpu-layers", "-1"
         ]
         
-        # Open log file for output redirection
         try:
             log_file = open(self.log_path, "w")
             subprocess.Popen(cmd, stdout=log_file, stderr=log_file)
@@ -125,15 +123,24 @@ class LlamaCppManager:
             time.sleep(2)
         return False
 
-    def load_model(self, model_name: str) -> bool:
-        """Validates model existence (.gguf) and starts the service."""
-        potential_paths = glob.glob(os.path.join(self.models_dir, f"*{model_name}*"))
-        
-        if not potential_paths:
-            logger.error(f"❌ Model file '{model_name}' not found in {self.models_dir}")
+    def load_model(self, repo_id: str, filename: str) -> bool:
+        """
+        Downloads GGUF weights via Hugging Face using explicit repo_id and filename,
+        then boots the service.
+        """
+        try:
+            logger.info(f"📥 Autonomous acquisition from Repo: '{repo_id}' | File: '{filename}'...")
+            
+            # Download automatico gestito da huggingface_hub direttamente nella cache
+            model_path = hf_hub_download(
+                repo_id=repo_id,
+                filename=filename,
+                cache_dir=self.cache_dir
+            )
+            
+            logger.info(f"📦 Model weights ready at: {model_path}")
+            return self.ensure_service(model_path)
+
+        except Exception as e:
+            logger.error(f"❌ Autonomous model download/load failed for '{repo_id}/{filename}': {e}")
             return False
-        
-        model_path = potential_paths[0]
-        logger.info(f"📦 Model located: {model_path}")
-        
-        return self.ensure_service(model_path)
