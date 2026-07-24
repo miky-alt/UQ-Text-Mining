@@ -21,6 +21,26 @@ UQ_REGISTRY = {
             "need_training": False,
             "description": "Quantifies sequence-level uncertainty by computing the entropy of attention weights, which reflects the model's focus distribution and internal token-level indecision during generation. [Reference: https://openreview.net/forum?id=LYx4w3CAgy]"
         },
+        "DegMat": {
+            "supported_granularity": ["sequence"],
+            "min_required_mode": "black",
+            "estimator_class": DegMat,
+            "category": "Sample diversity",
+            "compute": "High",
+            "memory": "Low",
+            "need_training": False,
+            "description": "Computes sequence uncertainty and confidence scores using the degree matrix derived from a response similarity graph. High-degree nodes represent well-connected, consistent responses in high-confidence regions, whereas sequence uncertainty is quantified via the normalized trace complement ($U_{\text{Deg}} = \text{trace}(mI - D)/m^2$). [Reference: (Lin et al., 2023, https://arxiv.org/abs/2305.19187]"
+        },
+        "Eccentricity": {
+                    "supported_granularity": ["sequence"],
+                    "min_required_mode": "black",
+                    "estimator_class": Eccentricity,
+                    "category": "Sample diversity",
+                    "compute": "High",
+                    "memory": "Low",
+                    "need_training": False,
+                    "description": "Quantifies sequence uncertainty and individual confidence scores by constructing response coordinate embeddings via graph Laplacian eigenvectors. Uncertainty is measured as the norm of the offset from the average embedding ($U_{\text{Ecc}} = \|[v_1'^\top, \dots, v_m'^\top]\|_2$), while confidence corresponds to the negative distance from the center ($C_{\text{Ecc}}(x, s_j) = -\|v_j'\|_2$).[Reference: (Lin et al., 2023, https://arxiv.org/abs/2305.19187]"
+                },
         "BoostedProbSequence": {
             "supported_granularity": ["sequence", "claim"],
             "min_required_mode": "white",
