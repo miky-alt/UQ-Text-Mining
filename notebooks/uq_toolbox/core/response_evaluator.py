@@ -1,4 +1,6 @@
 import abc
+from uqlm.utils import LLMGrader
+
 class BaseResponseEvaluator(abc.ABC):
     """
     Abstract Base Class acting as a unified contract for evaluating VLM
