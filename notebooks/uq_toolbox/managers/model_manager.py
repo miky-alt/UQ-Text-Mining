@@ -156,7 +156,6 @@ class UQModelManager:
             self.polygraph_models[alias] = BlackboxModel(
                 model_path=model_id, openai_api_key=os.environ.get("OPENAI_API_KEY"), hf_api_token=os.environ.get("HF_TOKEN"), supports_logprobs=True, generation_parameters=shared_generation_params
             )
-
     def add_uqlm_model(self,
                        provider: str,
                        model_id: Optional[str] = None,
@@ -167,6 +166,8 @@ class UQModelManager:
                        custom_llm: Optional[Any] = None,
                        ollama_url: str = "http://localhost:11434",
                        auto_install: bool = False,
+                       repo_id: Optional[str] = None,
+                       filename: Optional[str] = None,
                        **uqlm_kwargs):
         """Adds a LangChain LLM to the registry with independent box mode mapping."""
         current_mode = mode.strip().lower() if mode else self.default_uqlm_mode
@@ -210,11 +211,18 @@ class UQModelManager:
         elif provider == "llamacpp":
             print(f"\n📊 Initializing LlamaCpp for [{alias.upper()}]...")
             
+            # Risoluzione esplicita di repo_id e filename
+            target_repo = repo_id or model_id
+            target_file = filename or (f"{model_id}.gguf" if model_id and not model_id.endswith(".gguf") else model_id)
+
+            if not target_repo or not target_file:
+                raise ValueError(f"For 'llamacpp' provider, both 'repo_id' and 'filename' must be specified for alias '{alias}'.")
+
             # Use LlamaCppManager for binary installation and service lifecycle
             manager = LlamaCppManager(base_url=ollama_url)
 
-            # Ensure model is ready; returns False if download or start fails
-            if not manager.load_model(model_name=model_id):
+            # Ensure model is ready passing explicit repo_id and filename
+            if not manager.load_model(repo_id=target_repo, filename=target_file):
                 print(f"❌ Aborting allocation for alias [{alias.upper()}]: Service failed.")
                 return
 
@@ -224,7 +232,7 @@ class UQModelManager:
             self.langchain_llms[alias] = ChatOpenAI(
                 base_url=f"{manager.base_url}/v1",
                 api_key="llama-cpp-local",
-                model=model_id,
+                model=target_file,
                 temperature=temperature,
                 max_tokens=max_tokens,
                 model_kwargs=model_kwargs,
@@ -355,13 +363,15 @@ def initialize_uq_models(
 
         uq_engine.add_uqlm_model(
             provider=config["provider"],
-            model_id=config["model_id"],
+            model_id=config.get("model_id"),
             alias=alias,
             mode=config.get("mode", u_mode),
             temperature=config.get("temperature", temperature),
             max_tokens=config.get("max_tokens", max_tokens),
             ollama_url=ollama_url,
             auto_install=config.get("auto_install", auto_install),
+            repo_id=config.get("repo_id"),       # ✨ Estratto dalla config
+            filename=config.get("filename"),     # ✨ Estratto dalla config
             **merged_kwargs
         )
 
