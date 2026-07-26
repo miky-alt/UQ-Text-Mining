@@ -316,7 +316,7 @@ async def _handle_uqlm_execution(
         result_key = "ensemble_scores"
     else:
         real_scorer_name = tech_info.get(
-            "uqlm_scorer_name", technique_name.replace("uqlm_", "")
+            "scorer_id", technique_name.replace("uqlm_", "")
         )
         uqlm_wrapper = uqlm_class(
             llm=langchain_llm, scorers=[real_scorer_name], **kwargs

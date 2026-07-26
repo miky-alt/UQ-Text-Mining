@@ -15,11 +15,17 @@ from .core.response_evaluator import BaseResponseEvaluator, SubstringMatchEvalua
 from .managers.llama_cpp_manager import LlamaCppManager
 
 # 5. Learned UQ (Backend con supervised uncertainty head)
-from .learned_uq import (
-    SupervisedUQManager,
-    evaluate_supervised_uncertainty,
-    evaluate_supervised_batch,
-)
+# Optional: requires the separate `luh` (llm-uncertainty-head) package. Falls back
+# gracefully so the rest of the toolbox (registry/engine/managers) still works without it.
+try:
+    from .learned_uq import (
+        SupervisedUQManager,
+        evaluate_supervised_uncertainty,
+        evaluate_supervised_batch,
+    )
+    _HAS_LEARNED_UQ = True
+except ImportError:
+    _HAS_LEARNED_UQ = False
 
 # 6. Public API Control (La lista bianca delle API esportate)
 __all__ = [
@@ -30,8 +36,12 @@ __all__ = [
     "BaseResponseEvaluator",
     "SubstringMatchEvaluator",
     "LlamaCppManager",
-    "SupervisedUQManager",
-    "evaluate_supervised_uncertainty",
-    "evaluate_supervised_batch",
     "__version__",
 ]
+
+if _HAS_LEARNED_UQ:
+    __all__ += [
+        "SupervisedUQManager",
+        "evaluate_supervised_uncertainty",
+        "evaluate_supervised_batch",
+    ]

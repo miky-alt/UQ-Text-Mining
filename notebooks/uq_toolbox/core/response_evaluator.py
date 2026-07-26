@@ -23,7 +23,7 @@ class LLMGraderEvaluator(BaseResponseEvaluator):
     """
     Wrapper that utilizes the existing LLMGrader class for evaluation purposes.
     """
-    def __init__(self, grader: LLMGrader):
+    def __init__(self, grader):
         self.grader = grader
 
     async def __call__(self, prompt: str, generated_text: str, ground_truth: str) -> float:

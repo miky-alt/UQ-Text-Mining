@@ -13,4 +13,5 @@ dependencies = [
 ]
 
 [tool.setuptools]
-packages = ["uq_toolbox", "uq_toolbox.core", "uq_toolbox.data", "uq_toolbox.managers"]
+package-dir = {"" = "notebooks"}
+packages = ["uq_toolbox", "uq_toolbox.core", "uq_toolbox.data", "uq_toolbox.managers", "uq_toolbox.learned_uq"]

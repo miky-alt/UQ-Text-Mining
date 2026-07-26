@@ -111,6 +111,16 @@ UQ_REGISTRY = {
             "need_training": False,
             "description": "Quantifies sequence-level semantic uncertainty by computing the von Neumann entropy of kernels derived from pairwise semantic similarities between generations, offering a more fine-grained and expressive measure than cluster-based semantic entropy. [Reference: https://arxiv.org/pdf/2405.20003]"
         },
+        "EigLaplacian": {
+            "supported_granularity": ["sequence"],
+            "min_required_mode": "black",
+            "estimator_class": EigValLaplacian,
+            "category": "Sample diversity",
+            "compute": "High",
+            "memory": "Low",
+            "need_training": False,
+            "description": "Estimates uncertainty via the eigenvalues of the graph Laplacian built from pairwise NLI-entailment similarity between sampled responses, capturing the dispersion of the response manifold. [Reference: https://openreview.net/forum?id=Zj12nzlQbz]"
+        },
         "LabelProb": {
             "supported_granularity": ["sequence"],
             "min_required_mode": "black",
@@ -181,6 +191,16 @@ UQ_REGISTRY = {
             "need_training": False,
             "description": "Estimates token-level uncertainty by directly retrieving the log-probability of the generated token from the model's output distribution; represents a fundamental white-box feature of autoregressive language models."
         },
+        "MonteCarloSequenceEntropy": {
+            "supported_granularity": ["sequence"],
+            "min_required_mode": "white",
+            "estimator_class": MonteCarloSequenceEntropy,
+            "category": "Sample diversity",
+            "compute": "Medium",
+            "memory": "Low",
+            "need_training": False,
+            "description": "Estimates sequence-level predictive entropy via Monte-Carlo sampling, averaging the negative log-probability of several sampled generations to capture the model's uncertainty across the generation manifold. [Reference: https://arxiv.org/abs/2302.09664]"
+        },
         "NumSemSets": {
             "supported_granularity": ["sequence"],
             "min_required_mode": "black",
@@ -240,6 +260,16 @@ UQ_REGISTRY = {
             "memory": "Low",
             "need_training": True,
             "description": "Computes a contrastive OOD score by subtracting the Mahalanobis distance of a background distribution from the in-domain Mahalanobis distance, effectively normalizing for layer-specific variance. [Reference: Ren et al. (2023), https://doi.org/10.48550/arXiv.2209.15558]"
+        },
+        "RenyiNeg": {
+            "supported_granularity": ["sequence"],
+            "min_required_mode": "white",
+            "estimator_class": RenyiNeg,
+            "category": "Information-based",
+            "compute": "Low",
+            "memory": "Low",
+            "need_training": False,
+            "description": "Quantifies sequence-level uncertainty via the Rényi divergence between each token's predicted distribution and the uniform distribution, offering an information-theoretic alternative to entropy-based confidence. [Reference: https://arxiv.org/pdf/2212.09171.pdf]"
         },
         "SelfCertainty": {
             "supported_granularity": ["sequence"],
@@ -320,6 +350,26 @@ UQ_REGISTRY = {
             "memory": "Low",
             "need_training": False,
             "description": "Estimates sequence informativeness and relevance by computing the arithmetic mean of token-level Pointwise Mutual Information (PMI) scores between input and output. [Reference: Takayama & Arase (2019), https://aclanthology.org/W19-4115/]"
+        },
+        "SemanticDensity": {
+            "supported_granularity": ["sequence"],
+            "min_required_mode": "white",
+            "estimator_class": SemanticDensity,
+            "category": "Sample diversity",
+            "compute": "High",
+            "memory": "Low",
+            "need_training": False,
+            "description": "Approximates a probability density function in semantic space by combining NLI-based semantic similarity across sampled generations with token-probability weighting, using the model's internal logits to prioritize regions of likely correctness. [Reference: https://arxiv.org/abs/2405.13845]"
+        },
+        "SAR": {
+            "supported_granularity": ["sequence"],
+            "min_required_mode": "white",
+            "estimator_class": SAR,
+            "category": "Sample diversity",
+            "compute": "High",
+            "memory": "Low",
+            "need_training": False,
+            "description": "Shifting Attention to Relevance (SAR): reweights token- and sample-level uncertainty by how semantically relevant each token/sample is to the overall meaning, reducing the influence of irrelevant tokens on the final score. [Reference: https://doi.org/10.48550/arXiv.2307.01379]"
         },
         "SentSAR": {
             "supported_grammar": ["sequence"],

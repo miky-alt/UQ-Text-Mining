@@ -1,7 +1,7 @@
-from .model_manager import ModelManager
+from .model_manager import UQModelManager
 from .llama_cpp_manager import LlamaCppManager
 
 __all__ = [
-    "ModelManager",
+    "UQModelManager",
     "LlamaCppManager",
 ]
