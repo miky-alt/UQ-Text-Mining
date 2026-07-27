@@ -211,7 +211,7 @@ class UQModelManager:
         elif provider == "llamacpp":
             print(f"\n📊 Initializing LlamaCpp for [{alias.upper()}]...")
             
-            # Risoluzione esplicita di repo_id e filename
+            # Explicit resolution of repo_id and filename
             target_repo = repo_id or model_id
             target_file = filename or (f"{model_id}.gguf" if model_id and not model_id.endswith(".gguf") else model_id)
 
@@ -387,8 +387,8 @@ def initialize_uq_models(
             max_tokens=config.get("max_tokens", max_tokens),
             ollama_url=ollama_url,
             auto_install=config.get("auto_install", auto_install),
-            repo_id=config.get("repo_id"),       # ✨ Estratto dalla config
-            filename=config.get("filename"),     # ✨ Estratto dalla config
+            repo_id=config.get("repo_id"),       # extracted from config
+            filename=config.get("filename"),     # extracted from config
             **merged_kwargs
         )
 

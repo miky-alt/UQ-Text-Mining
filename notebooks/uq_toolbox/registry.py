@@ -608,7 +608,7 @@ def list_uq_techniques(
     """
     print("\n🔍 UQ FRAMEWORK CORE ENGINE - METHOD TAXONOMY AND HARDWARE COST ANALYSIS")
 
-    # Linea separatrice estesa per accogliere la colonna della descrizione
+    # Extended separator line to accommodate the description column
     separator = "=" * 160
     header = f"{'TECHNIQUE':<35} | {'LIBRARY':<12} | {'MODE':<6} | {'CATEGORY':<20} | {'TRAIN':<5} | {'COMPUTE':<8} | {'DESCRIPTION'}"
 
@@ -628,13 +628,13 @@ def list_uq_techniques(
             train = "Yes" if info.get("need_training", False) else "No"
             desc = info.get("description", "No description available.")
             
-            # --- Filtri ---
+            # --- Filters ---
             if mode and req_mode.lower() != mode.lower(): continue
             if compute and comp.lower() != compute.lower(): continue
             if need_training is not None and info.get("need_training", False) != need_training: continue
             if category and category.lower() not in cat.lower(): continue
             
-            # Stampa riga con inclusione della descrizione
+            # Print row including the description
             print(f"{tech_name:<35} | {lib_enum.value:<12} | {req_mode:<6} | {cat:<20} | {train:<5} | {comp:<8} | {desc}")
             count += 1
 

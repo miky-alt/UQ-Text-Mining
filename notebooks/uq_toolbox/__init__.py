@@ -1,17 +1,17 @@
 # __init__.py
 
-# 1. Versioning (Pratica standard per librerie professionali)
+# 1. Versioning
 __version__ = "0.1.0"
 
-# 2. Main API (Le tue funzioni principali)
+# 2. Main API
 from .core.pipeline import compute_dataset_uq_scores, compute_batch_uqlm_scores
 from .core.uq_engine import evaluate_uncertainty
 from .registry import UQ_REGISTRY
 
-# 3. Evaluators (Esponi le classi per l'iniezione delle dipendenze)
+# 3. Evaluators (exposed for dependency injection)
 from .core.response_evaluator import BaseResponseEvaluator, SubstringMatchEvaluator
 
-# 4. Managers (Se necessario, esponi i manager)
+# 4. Managers
 from .managers.llama_cpp_manager import LlamaCppManager
 
 # 5. Learned UQ (Backend con supervised uncertainty head)
@@ -27,7 +27,7 @@ try:
 except ImportError:
     _HAS_LEARNED_UQ = False
 
-# 6. Public API Control (La lista bianca delle API esportate)
+# 6. Public API Control (whitelist of exported APIs)
 __all__ = [
     "compute_dataset_uq_scores",
     "compute_batch_uqlm_scores",

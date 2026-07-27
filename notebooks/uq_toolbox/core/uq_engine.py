@@ -396,13 +396,13 @@ async def evaluate_uncertainty(
 
     # --- 1. Smart Lookup & Disambiguation Logic ---
     if library:
-        # Normalizzazione dell'input della libreria (può essere l'Enum o la stringa es. "uqlm")
+        # Normalize the library input (can be the Enum or a string, e.g. "uqlm")
         lib_enum = library if isinstance(library, UQLibrary) else next((l for l in UQLibrary if l.value == library), None)
         if lib_enum and lib_enum in UQ_REGISTRY and technique_name in UQ_REGISTRY[lib_enum]:
             found_lib = lib_enum
             tech_info = UQ_REGISTRY[lib_enum][technique_name]
     else:
-        # Ricerca automatica della tecnica in tutte le librerie registrate
+        # Automatic technique lookup across all registered libraries
         matches = []
         for lib_enum, techniques in UQ_REGISTRY.items():
             if technique_name in techniques:
