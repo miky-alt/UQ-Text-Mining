@@ -240,6 +240,23 @@ class UQModelManager:
             )
             print(f"🔗 LlamaCpp instance active at {manager.base_url}/v1")
 
+        # Handle Ollama Provider
+        elif provider == "ollama":
+            self.langchain_llms[alias] = ChatOllama(
+                base_url=ollama_url,
+                model=model_id,
+                temperature=temperature,
+                num_predict=max_tokens,
+                logprobs=True if current_mode == "white" else None,
+                **uqlm_kwargs,
+            )
+
+        else:
+            raise ValueError(
+                f"Unknown UQLM provider '{provider}' for alias '{alias}'. "
+                "Supported providers: custom, openai, google, anthropic, llamacpp, ollama."
+            )
+
     def remove_models(self, aliases: Optional[Union[list[str], str]] = None) -> None:
         """
         Safely removes specified model aliases or all models from memory,
