@@ -1,146 +1,198 @@
 dataset,sample_id,answer_key,generated_text,predicted_letter,correct,LabelProb,EigLaplacian,UQLM-Entailment,MSP,MeanTokenEntropy,Mahalanobis
 MedQA,0,B," B
-Explanation: 
-The patient presents with classic symptoms of sickle cell disease, including jaundice, anemia, bone pai",B,1,0.0,0.99999986588955,0.709321778267622,0.0161922220140695,0.0276292283087968,
-MedQA,1,C," C 
+Answer:
+Answer: B
 
+The most likely cause of the child's condition is B. Sickle cell disease. The clinical presentatio",B,1,0.9,6.328544557094575,0.4806082248687744,10.946390151977539,0.5381721258163452,
+MedQA,1,C," C
+Answer:
+Answer: C
 
-**Explanation:**
+The most likely diagnosis is Posttraumatic Stress Disorder (PTSD), as the patient has experienced ",C,1,0.8,5.115735650062561,0.1903065919876099,19.44699478149414,1.308154582977295,
+MedQA,2,B," D
 
-The patient's symptoms align strongly with Posttraumatic Stress Disorder (PTSD). Here's why:
+Explanation: The patient has a urinary tract infection (UTI) and is experiencing urinary incontinence. The next step",D,0,0.8,3.9810121059417733,0.7521357568679378,13.766411781311035,1.7398262023925781,
+MedQA,3,C," C
+Answer:
+The most likely etiology of the patient's condition is C. Protein S deficiency.
 
-* ",C,1,0.0,1.0000001639127738,0.8445693671703338,0.0024160218890756,0.0051334798336029,
-MedQA,2,B," **B**
-
-Explanation: 
-The patient presents with classic symptoms of a urinary retention, including urinary incontinence,",B,1,0.4,1.94939386844635,0.3382433950901031,1.467958927154541,0.3211926519870758,
-MedQA,3,C," A
-Explanation: 
-
-The patient presented with sudden-onset dyspnea, tachycardia, and a history of deep vein thrombosis (D",A,0,0.0,1.000000014901162,0.4328616261482239,0.0386426635086536,0.0577673017978668,
+Explanation: The patient has",C,1,0.9,6.170660227537155,0.5966569781303406,19.522563934326172,0.7119436264038086,
 MedQA,4,B," D
-Explanation: 
-The patient presents with classic symptoms of neonatal jaundice, including scleral icterus, pale stools",D,0,0.0,0.99999986588955,0.8635145425796509,0.0123045938089489,0.0215058773756027,
-MedQA,5,B," B
 
-Explanation: 
-The patient's symptoms and history suggest a possible diagnosis of thyroid cancer. The firm, symmetric",B,1,0.0,0.99999986588955,0.2025913894176483,0.0303184110671281,0.0452047809958457,
-MedQA,6,D," D
+Explanation: The most likely diagnosis is D. Breast milk jaundice. The patient has a history of switching to formula",D,0,0.9,5.116152793169022,0.8545657247304916,19.52719497680664,0.7680103778839111,
+MedQA,5,B," D
 
-Explanation: 
-The patient presents with classic symptoms of cholecystitis, including right upper quadrant pain, naus",D,1,0.0,0.99999986588955,0.0191596653312444,0.1209637448191642,0.1436121016740799,
-MedQA,7,C," **A** 
+Answer:
+To determine the most likely finding in the biopsy of the patient's neck mass, we need to consider the clini",D,0,0.8,3.6842142182392537,0.7889709919691086,11.532464981079102,0.8825418949127197,
+MedQA,6,D," B
+Answer:
+Answer: B
 
-Explanation: 
-The patient's symptoms are consistent with an allergic reaction, specifically an **anaphylactic r",A,0,0.0999999999999999,1.000000014901162,0.1104769259691238,0.0732848718762397,0.0866385027766227,
-MedQA,8,A," A 
+The most likely cause of the patient's symptoms is B. Fistula between the gallbladder and small in",B,0,0.8,6.609967350959778,0.4041150212287903,31.234058380126953,1.5677927732467651,
+MedQA,7,C," B
 
-Explanation: 
-The patient's amenorrhea is most likely due to a pituitary tumor. The galactorrhea, temporal field vi",A,1,0.0,1.000000014901162,0.0994191393256187,0.0118165621533989,0.0206145644187927,
-MedQA,9,C," C
+Answer:
+Answer: B
 
-Explanation: 
-Acral lentiginous melanoma is the most common type of melanoma in African-Americans. This is due to th",C,1,0.0,1.0000001639127738,1.0,0.0105616869404912,0.0186672993004322,
-MedQA,10,A," C 
+The patient presents with red scaly plaques over both ears. The key features are erythema and ten",B,0,0.9,5.192026674747467,0.5621159970760345,15.036872863769531,0.8124377131462097,
+MedQA,8,A," B
 
-Explanation: 
-Septic arthritis is a serious infection of the joint, and the most common causative organism is Staph",C,0,0.0,1.0000001639127738,0.9626688480377196,0.0633836016058921,0.0553765371441841,
-MedQA,11,C," **C** 
+Explanation: The patient has a history of a car accident that caused a fracture in her forearm. This could lead to a",B,0,0.7,4.8634461164474505,0.5511159896850586,27.284603118896484,1.9168225526809692,
+MedQA,9,C," 
+The answer is B
+Answer:
+To determine the greatest risk of melanoma in a 44-year-old African-American woman with no his",B,0,0.9,6.65379282832146,0.8794299215078354,24.588329315185547,0.4483903646469116,
+MedQA,10,A," A
+Answer:
+Answer: A
 
-Explanation: 
+The patient has a history of total knee arthroplasty, which is a common site for septic arthritis.",A,1,0.8,7.0551757216453534,0.3445560336112976,27.817975997924805,1.1213469505310059,
+MedQA,11,C," D
 
-The patient presents with classic signs of disseminated intravascular coagulation (DIC).  Here's",C,1,0.0,1.0000001639127738,1.0,0.0216755494475364,0.0333053469657897,
-MedQA,12,A," A
-Explanation: 
-The patient presents with classic symptoms of acute cholecystitis, including severe right upper quadran",A,1,0.0,1.000000014901162,0.1013201922178268,0.0550534948706626,0.072824940085411,
-MedQA,13,B," **A**
+Explanation: The patient has a WBC of 20,000/mm^3, Hb of 10.1g/d",D,0,0.8,5.329213052988052,0.41823621392250065,16.643648147583008,1.15623140335083,
+MedQA,12,A," B
 
-Explanation: 
-The clinical presentation of this patient strongly suggests croup. The key features include:
-* **A",A,0,0.3,1.9734168648719796,0.141592338681221,0.5546489357948303,0.3007329702377319,
-MedQA,14,C," C 
+Explanation: The patient has a history of episodes that resolved spontaneously, which suggests that the cause is not",B,0,0.8,4.732971196143566,0.8502819240093231,32.813148498535156,0.36428403854370117,
+MedQA,13,B," D
 
+Answer:
+Answer: D
 
-**Explanation:**
+The patient is experiencing a respiratory distress with a high-pitched sound and stridor, indicat",D,0,0.8,5.521758019924164,0.9493346586823463,13.538867950439453,1.805069923400879,
+MedQA,14,C," B
 
-The patient presents with sudden onset of severe left leg pain and tingling, along with pale and",C,1,0.0,1.0000001639127738,1.0,0.0032359245233237,0.0070293303579092,
-MedQA,15,C," D
-",D,0,0.0,0.99999986588955,0.3802691698074341,0.094149962067604,0.0960498303174972,
+Explanation: The patient has a history of hypertension and is taking bisoprolol. The most common cause of acute limb",B,0,0.9,6.440896034240722,0.7689042836427689,31.366506576538086,0.6783800721168518,
+MedQA,15,C," C
+
+Explanation: The patient has a few days of edema, and the most likely diagnosis is minimal change disease. The serum",C,1,0.9,6.136067271232605,0.8080705553293228,17.32271957397461,1.2701804637908936,
 MedQA,16,D," D
+Answer:
+The correct answer is D. Fomepizole.
 
-Explanation: 
-The patient is presenting with symptoms consistent with Wernicke-Korsakoff syndrome, a condition cause",D,1,0.0,0.99999986588955,0.4531451165676117,0.0678135976195335,0.0727876424789428,
-MedQA,17,D," A. 
-Explanation: 
-The physician's primary responsibility is to provide the best possible care for the patient. In this ",A,0,0.0,1.000000014901162,0.0288320183753967,0.0919412598013877,0.0870599597692489,
+Fomepizole is a drug used to treat acute alcohol intoxication.",D,1,0.6,4.632921308279036,0.8198356032371521,12.787050247192383,0.9940157532691956,
+MedQA,17,D," D
+
+Answer:
+Answer: D
+
+The most appropriate action by the physician is to seek a court order for neoadjuvant chemotherap",D,1,0.8,3.419024256389099,0.8213966488838196,27.141204833984375,0.3796926736831665,
 MedQA,18,C," B
-Explanation: 
-The patient's symptoms and findings are consistent with a myocardial infarction (heart attack). 
 
-* **S",B,0,0.0,1.8978610262274749,0.4059452414512634,0.222731739282608,0.1981971710920334,
-MedQA,19,A," D
-Explanation: 
-Tamoxifen is a medication used to treat breast cancer. It is also associated with an increased risk of ",D,0,0.0,0.99999986588955,0.9640004634857178,0.0544841550290584,0.0629376918077468,
-MedQA,20,A," D 
+Explanation: The patient has a history of hypercholesterolemia and hypertension, and has smoked for 34 years. He has",B,0,0.9,5.744736999273298,0.3211081027984619,24.251455307006836,1.2908718585968018,
+MedQA,19,A," B
 
-Explanation: 
-The patient's avoidance behavior is consistent with a diagnosis of social anxiety disorder. Social an",D,0,0.0,0.99999986588955,1.0,0.0109085990116,0.0195749122649431,
-MedQA,21,A," B
-Explanation: 
-The cell indicated by the arrow is a macrophage. Macrophages are key players in the inflammatory respon",B,0,0.0,0.99999986588955,0.3004944920539856,0.0172826368361711,0.0286546647548675,
-MedQA,22,C," A. 
-Explanation: 
-The patient presents with classic symptoms of acute cholecystitis, including fever, fatigue, right sh",A,0,0.0,1.000000014901162,0.5216702312231064,0.0230648349970579,0.0352753587067127,
+Explanation: The patient has a history of obesity and a history of uterine myoma. These are risk factors for develop",B,0,0.9,4.889371991157532,0.9851021002978086,28.872093200683594,0.8927447199821472,
+MedQA,20,A," D
+
+Answer:
+To determine the correct answer, we need to evaluate the patient's condition based on the given information.",D,0,0.8,4.921435356140137,0.6226668953895569,20.033784866333008,1.1170756816864014,
+MedQA,21,A," D
+
+Explanation: The presence of the cell-type indicated by the arrow is most likely due to the leukotriene D4, which is",D,0,0.9,5.452461808919908,0.8133618831634521,41.216705322265625,1.9530572891235352,
+MedQA,22,C," C
+Answer:
+The best initial step in management of this patient is to perform an abdominal ultrasound to assess for signs",C,1,0.9,7.101609706878662,0.7047261297702789,9.063577651977539,1.4546582698822021,
 MedQA,23,D," C
-Explanation: 
-The patient presents with classic symptoms of osteoarthritis, including:
-* Bilateral knee pain
-* Pain w",C,0,0.0,0.9999997912512524,0.8893945932388305,0.0654303207993507,0.0618292428553104,
-MMLU-Medical,0,B," B. 
-",B,1,0.0,0.99999986588955,0.8612233400344849,0.0399759151041507,0.0558035299181938,
-MMLU-Medical,1,C," A 
-",A,0,0.0,1.000000014901162,0.2429999113082885,0.0333830676972866,0.0451240874826908,
-MMLU-Medical,2,D," D 
-",D,1,0.0,0.99999986588955,0.9820002317428588,0.0066882008686661,0.0131535772234201,
-MMLU-Medical,3,C," C 
-",C,1,0.0,1.0000001639127738,1.0,0.0022909813560545,0.0049376301467418,
-MMLU-Medical,4,B," B 
-",B,1,0.0,0.99999986588955,1.0,0.0036185628268867,0.0076446561142802,
-MMLU-Medical,5,D," 
-",,0,0.0,0.99999986588955,0.8032187562435865,0.0979954004287719,0.1080565080046653,
-MMLU-Medical,6,C," C 
-",C,1,0.0,1.0000001639127738,0.6203655805438757,0.1115286573767662,0.1098217144608497,
-MMLU-Medical,7,B," **C** 
-",C,0,0.5,1.9232374429702763,0.7492521736770869,0.7808021903038025,0.3022949397563934,
-MMLU-Medical,8,D," B. 
-",B,0,0.0,0.99999986588955,0.9475313425064088,0.0103069953620433,0.017641419544816,
-MMLU-Medical,9,C," C. 
-",C,1,0.0,1.0000001639127738,0.8313243865966797,0.0243886224925518,0.0314700901508331,
-MMLU-Medical,10,A," A 
-",A,1,0.0,1.000000014901162,1.0,0.0015258179046213,0.0036952167283743,
-MMLU-Medical,11,B," D. 
-",D,0,0.0,0.99999986588955,0.9640004634857178,0.0169127285480499,0.0237863026559352,
-MMLU-Medical,12,B," A 
-",A,0,0.0,1.000000014901162,1.0,0.0009247646667063,0.0023508227895945,
-MMLU-Medical,13,A," C 
-",C,0,0.0,1.0000001639127738,1.0,0.0020781878847628,0.004857771564275,
-MMLU-Medical,14,D," D 
-",D,1,0.0,0.99999986588955,1.0,0.0055740652605891,0.0110058113932609,
-MMLU-Medical,15,A," A 
-",A,1,0.0,1.000000014901162,1.0,0.0003171970311086,0.00086561095668,
-MMLU-Medical,16,C," A 
-",A,0,0.0999999999999999,1.9725791066885017,1.0,0.17698335647583,0.1349955648183822,
-MMLU-Medical,17,A," A 
-",A,1,0.0,1.000000014901162,0.9839908480644226,0.014345739968121,0.0195326507091522,
-MMLU-Medical,18,A," A 
-",A,1,0.5,1.9485080838203432,1.0,1.0344974994659424,0.2516450583934784,
-MMLU-Medical,19,B," B 
-",B,1,0.0,0.99999986588955,0.8267168641090393,0.0052687507122755,0.0101125529035925,
-MMLU-Medical,20,D," A 
-",A,0,0.0,1.000000014901162,0.0034629881847649,0.1638832688331604,0.1417353898286819,
-MMLU-Medical,21,B," 
-",,0,0.3,1.962003484368326,0.6124299246817827,0.6304306983947754,0.2347897589206695,
-MMLU-Medical,22,D," D 
-",D,1,0.0,0.99999986588955,1.0,0.0016831269022077,0.0034626759588718,
-MMLU-Medical,23,C," C 
-",C,1,0.0,1.0000001639127738,0.9813344240188598,0.0192703176289796,0.0288640037178993,
+
+Explanation: The patient presents with chronic, progressive knee pain that has been present for several years and ha",C,0,0.9,6.263911694288255,0.18628060817718506,25.740673065185547,2.0144095420837402,
+MMLU-Medical,0,B," D
+
+Explanation: The process of modifying protein structure after translation is called post-translational modification.",D,0,0.9,4.911359876394273,0.46300427913665776,33.088443756103516,0.8313539028167725,
+MMLU-Medical,1,C," D
+
+Answer:
+To answer this question, we need to understand the role of a patient's self-report of pain in healthcare. Th",D,0,0.8,2.828114410485498,0.618096150457859,38.143226623535156,0.894065260887146,
+MMLU-Medical,2,D," D
+
+Explanation: The rectal examination is indicated for the assessment of some gastrointestinal disorders. The correct ",D,1,0.5,1.811303369573852,0.2770844459533691,19.1047420501709,0.680402934551239,
+MMLU-Medical,3,C," B
+
+Explanation: The correct answer is B. The correct answer is B. The correct answer is B. The correct answer is B. The",B,0,0.9,4.119403973221777,0.7873590886592865,34.32283020019531,1.0826178789138794,
+MMLU-Medical,4,B," B
+
+Explanation: The electron transport chain is located in the inner membrane of the mitochondrion. The Krebs cycle is ",B,1,0.8,4.06601780653,0.2862893342971802,10.821106910705566,0.7508031129837036,
+MMLU-Medical,5,D," D
+
+Answer:
+Answer: D
+
+The DNA molecule is a double stranded molecule. In DNA, the purines are adenine and thymine, and",D,1,0.8,3.1753572374582304,0.42928604483604427,37.86891555786133,1.3298685550689697,
+MMLU-Medical,6,C," B
+
+Explanation: The correct answer is B. The reason is that if water is used for bladder washout, it may not be effecti",B,0,0.7,3.7774606723949393,0.3032190799713135,29.31285285949707,1.7654588222503662,
+MMLU-Medical,7,B," B
+Answer:
+B
+
+The correct answer is B. The statement that is false is B. Muscle lactate accumulation does not begin unti",B,1,0.7,6.00889202952385,0.3362888693809509,22.450565338134766,1.1432404518127441,
+MMLU-Medical,8,D," B
+
+The correct answer is B.
+Answer:
+B
+
+The correct answer is B.
+Answer:
+B
+
+The correct answer is B.
+Answer:
+B
+
+",B,0,0.8,5.969559907913209,0.8277581036090851,23.635332107543945,0.4054219424724579,
+MMLU-Medical,9,C," B
+
+Explanation: Hypothyroidism is characterized by a low level of thyroid hormone. The TSH is the thyroid-stimulating h",B,0,0.8,3.6226407438516635,0.8996912389993668,19.93625831604004,1.2102104425430298,
+MMLU-Medical,10,A," B
+
+Explanation: The β-oxidation of a molecule of palmitic acid, CH3(CH2)14CO2H, yields 8",B,0,0.8,3.0883993972729553,0.595467746257782,15.41663932800293,0.970734715461731,
+MMLU-Medical,11,B," D
+Answer:
+Answer: D
+Answer:
+Answer: D
+Answer:
+Answer: D
+Answer:
+Answer: D
+Answer:
+Answer: D
+",D,0,0.8,2.6753266107062057,0.3338521122932434,17.51193618774414,1.0532615184783936,
+MMLU-Medical,12,B," B
+Answer:
+B
+
+The correct answer is B. The reason provided is that less than 30% of people over 65 years have access",B,1,0.8,5.430415004491806,0.5121086239814758,24.633739471435547,0.5700509548187256,
+MMLU-Medical,13,A," B
+
+Explanation: The carpal tunnel syndrome is caused by compression of the ulnar nerve. The other options are incorrect",B,0,0.7,4.01961967235753,0.4592243731021881,4.589395999908447,0.6931402683258057,
+MMLU-Medical,14,D," B
+
+Explanation: The energy charge is the difference between the charge on the outside and inside of a cell. It is gener",B,0,0.9,6.113104283809662,0.6152688562870026,11.796009063720703,0.853070855140686,
+MMLU-Medical,15,A," A
+
+Answer:
+To answer this question, we need to understand what a hypertonic solution is. A hypertonic solution is a sol",A,1,0.8,2.644998466501575,0.6100811958312988,12.075942993164062,1.0597453117370605,
+MMLU-Medical,16,C," A
+
+Explanation: Dry mouth is a common side effect of steroids, which are used to treat conditions such as asthma, aller",A,0,0.8,5.295822978019714,0.40617620944976807,24.664947509765625,1.5621005296707153,
+MMLU-Medical,17,A," A
+
+Explanation: A protein is a complex molecule made of amino acids. Each amino acid has a side chain and a carboxyl gr",A,1,0.9,3.5744723677635197,0.8790429979562759,28.928691864013672,1.5684993267059326,
+MMLU-Medical,18,A," D
+
+Explanation: The correct answer is D. The statement about joint stiffness is correct. A is incorrect because gout is",D,0,0.7,4.9330063462257385,0.43200981616973877,34.011444091796875,1.320988655090332,
+MMLU-Medical,19,B," D
+
+Explanation: Anaphylaxis is a severe allergic reaction that can cause a variety of symptoms. It can include wheezing",D,0,0.9,3.937382437423859,0.36231529712677,16.879024505615234,0.530229926109314,
+MMLU-Medical,20,D," B
+
+Explanation: The Krebs cycle is a cycle of 2 steps. Each step produces 2CO2 and 2ATP. So, ",B,0,0.8,4.08114689588547,0.8744161128997803,11.782257080078125,0.6076406240463257,
+MMLU-Medical,21,B," B
+Explanation: The ATP store in muscle can only supply energy in high intensity exercise for about 2 seconds. This is b",B,1,0.8,4.0748478937443915,0.26795780658721924,17.72241973876953,1.4634313583374023,
+MMLU-Medical,22,D," D
+
+Explanation: The sarcoplasmic reticulum is a network of calcium storage sites in muscle cells. These calcium ions ar",D,1,0.8,3.7363217025995246,0.7984982281923294,16.552471160888672,0.947665810585022,
+MMLU-Medical,23,C," B
+
+Explanation: The correct answer is B. The answer is B. The correct answer is B. The correct answer is B. The correct",B,0,0.8,3.123711375314183,0.23385590314865112,33.24448013305664,1.632978081703186,
