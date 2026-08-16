@@ -13,16 +13,16 @@ logger = logging.getLogger("LlamaCppManager")
 
 class LlamaCppManager:
     """
-    Unified controller for llama.cpp service lifecycle using a lightweight 
+    Unified controller for llama.cpp service using a lightweight 
     pre-compiled `bin` artifacts folder with autonomous GGUF downloading.
     """
     def __init__(self,
-                 base_url: str = "http://localhost:11434",
-                 cache_dir: str = "/tmp/llama_cache",
-                 binary_path: str = "./bin/llama-server",
-                 log_path: str = "./llama.log",
-                 bin_artifacts_dir: str = "/content/uq_toolbox/llama_bin_artifacts",
-                 drive_backup_dir: str = "/content/drive/MyDrive/UQ_Toolbox_Backups"):
+             base_url: str = "http://localhost:11434",
+             cache_dir: str = "/tmp/llama_cache",
+             binary_path: str = "./bin/llama-server",
+             log_path: str = "./llama.log",
+             bin_artifacts_dir: str = "/content/UQ-Text-Mining/notebooks/uq_toolbox/llama_bin_artifacts",
+             drive_backup_dir: str = "/content/drive/MyDrive/UQ_Toolbox_Backups"):
 
         self.base_url = base_url.strip().rstrip("/")
         self.port = self.base_url.split(":")[-1] if ":" in self.base_url else "11434"
@@ -51,17 +51,17 @@ class LlamaCppManager:
 
     def _setup_prebuilt_binaries(self) -> bool:
         """
-        Configura l'ambiente utilizzando esclusivamente la cartella leggera `llama_bin_artifacts` 
-        contenente solo l'eseguibile e le librerie .so, ripristinandola da Google Drive se necessario.
+        Configures the environment using exclusively the lightweight `llama_bin_artifacts` folder 
+        containing only the executable and .so libraries, restoring it from Google Drive if necessary.
         """
         work_dir = os.path.dirname(self.binary_path)
         server_binary = os.path.join(self.bin_artifacts_dir, "llama-server")
 
-        logger.info(f"🚚 [Setup] Verifica dei binari leggeri in: {self.bin_artifacts_dir}...")
+        logger.info(f"🚚 [Setup] Checking lightweight binaries in: {self.bin_artifacts_dir}...")
 
-        # 1. Se la cartella locale non ha l'eseguibile, prova a ripristinare da Google Drive
+        # 1. If the local folder does not have the executable, try restoring from Google Drive
         if not os.path.exists(server_binary):
-            logger.info("☁️ Binari non trovati localmente. Tentativo di ripristino da Google Drive...")
+            logger.info("☁️ Binaries not found locally. Attempting restore from Google Drive...")
             try:
                 from google.colab import drive
                 if not os.path.exists("/content/drive"):
@@ -71,14 +71,14 @@ class LlamaCppManager:
                 if os.path.exists(drive_zip):
                     os.makedirs(self.bin_artifacts_dir, exist_ok=True)
                     shutil.unpack_archive(drive_zip, self.bin_artifacts_dir, 'zip')
-                    logger.info("✅ Artifacts ripristinati con successo da Google Drive!")
+                    logger.info("✅ Artifacts successfully restored from Google Drive!")
             except Exception as e:
-                logger.warning(f"⚠️ Impossibile ripristinare da Google Drive: {e}")
+                logger.warning(f"⚠️ Failed to restore from Google Drive: {e}")
 
-        # 2. Se ancora non esiste, compila temporaneamente da sorgente (una tantum) e isola solo il bin/lib
+        # 2. If it still doesn't exist, temporarily compile from source (one-off) and isolate only the bin/lib
         server_binary = os.path.join(self.bin_artifacts_dir, "llama-server")
         if not os.path.exists(server_binary):
-            logger.info("⚙️ [Compilazione] Nessun artifact trovato. Compilazione pulita in corso...")
+            logger.info("⚙️ [Compilation] No artifacts found. Performing clean compilation...")
             temp_src = os.path.join("/content", "temp_llama_build_src")
             temp_build = os.path.join(temp_src, "build")
 
@@ -90,29 +90,29 @@ class LlamaCppManager:
                 subprocess.run(["cmake", "-S", temp_src, "-B", temp_build, "-DGGML_CUDA=ON"], check=True)
                 subprocess.run(["cmake", "--build", temp_build, "--config", "Release", "-j4"], check=True)
 
-                # Trova l'eseguibile compilato
+                # Find the compiled executable
                 compiled_server = os.path.join(temp_build, "bin", "llama-server")
                 if not os.path.exists(compiled_server):
                     compiled_server = os.path.join(temp_build, "llama-server")
 
                 if not os.path.exists(compiled_server):
-                    raise FileNotFoundError("Compilazione completata ma eseguibile 'llama-server' non trovato.")
+                    raise FileNotFoundError("Compilation completed but 'llama-server' executable not found.")
 
-                # Crea la cartella pulita dei binari leggeri
+                # Create the clean lightweight binaries folder
                 os.makedirs(self.bin_artifacts_dir, exist_ok=True)
                 shutil.copy(compiled_server, os.path.join(self.bin_artifacts_dir, "llama-server"))
 
-                # Raccoglie solo i file .so generati nella build
+                # Collect only the .so files generated in the build
                 for root, dirs, files in os.walk(temp_build):
                     for file_name in files:
                         if ".so" in file_name:
                             shutil.copy(os.path.join(root, file_name), os.path.join(self.bin_artifacts_dir, file_name))
 
-                # Pulisce i sorgenti temporanei pesanti
+                # Clean up heavy temporary sources
                 shutil.rmtree(temp_src)
-                logger.info("✨ Sorgenti temporanei rimossi. Creati solo gli artifact leggeri.")
+                logger.info("✨ Temporary sources removed. Only lightweight artifacts created.")
 
-                # Salva l'archivio leggero su Google Drive
+                # Save lightweight archive to Google Drive permanently
                 try:
                     from google.colab import drive
                     if not os.path.exists("/content/drive"):
@@ -125,31 +125,31 @@ class LlamaCppManager:
                     if os.path.exists(f"{zip_base}.zip"):
                         os.remove(f"{zip_base}.zip")
                         
-                    logger.info("☁️ Backup leggero salvato permanentemente su Google Drive.")
+                    logger.info("☁️ Lightweight backup permanently saved to Google Drive.")
                 except Exception as ex:
-                    logger.warning(f"⚠️ Impossibile salvare su Google Drive: {ex}")
+                    logger.warning(f"⚠️ Failed to save to Google Drive: {ex}")
 
             except Exception as e:
-                logger.error(f"💥 Errore critico durante la compilazione: {e}")
+                logger.error(f"💥 Critical error during compilation: {e}")
                 if os.path.exists(temp_src):
                     shutil.rmtree(temp_src)
                 return False
 
-        # Verifica finale dell'eseguibile nei binari leggeri
+        # Final verification of the executable in the lightweight binaries
         server_binary = os.path.join(self.bin_artifacts_dir, "llama-server")
         if not os.path.exists(server_binary):
-            logger.error("❌ L'eseguibile 'llama-server' non è reperibile negli artifacts.")
+            logger.error("❌ The 'llama-server' executable could not be found in the artifacts.")
             return False
 
         try:
-            # Copia l'eseguibile nella destinazione finale e imposta i permessi
+            # Copy the executable to the final destination and set permissions
             if os.path.exists(self.binary_path):
                 os.remove(self.binary_path)
 
             shutil.copy(server_binary, self.binary_path, follow_symlinks=True)
             os.chmod(self.binary_path, 0o755)
 
-            # Copia tutte le librerie dinamiche (.so) nella working directory del server
+            # Copy all dynamic libraries (.so) to the server working directory
             so_count = 0
             for file_name in os.listdir(self.bin_artifacts_dir):
                 if ".so" in file_name:
@@ -160,15 +160,15 @@ class LlamaCppManager:
                     shutil.copy(src_so, dst_so, follow_symlinks=True)
                     so_count += 1
 
-            logger.info(f"✅ Configurate con successo l'eseguibile e {so_count} librerie dinamiche.")
+            logger.info(f"✅ Successfully configured the executable and {so_count} dynamic libraries.")
             return True
 
         except Exception as e:
-            logger.error(f"💥 Errore critico durante la configurazione dei binari: {e}")
+            logger.error(f"💥 Critical error during binary configuration: {e}")
             return False
 
     def ensure_service(self, model_path: str, mmproj_path: Optional[str] = None) -> bool:
-        """Assicura che il server sia attivo, aggiungendo il supporto mmproj se fornito."""
+        """Ensures the server is active, adding mmproj support if provided."""
         if self.is_running():
             return True
 
@@ -186,7 +186,7 @@ class LlamaCppManager:
             "-m", model_path,
         ]
 
-        # ✨ Aggiunge il proiettore visivo se il modello è multimodale (es. LLaVA)
+        # ✨ Adds the vision projector if the model is multimodal (e.g., LLaVA)
         if mmproj_path:
             cmd.extend(["--mmproj", mmproj_path])
 
@@ -201,7 +201,7 @@ class LlamaCppManager:
             self.log_file = open(self.log_path, "w")
             self.process = subprocess.Popen(cmd, stdout=self.log_file, stderr=self.log_file, env=env)
         except Exception as e:
-            logger.error(f"💥 Errore di avvio processo: {e}")
+            logger.error(f"💥 Process startup error: {e}")
             return False
 
         logger.info(f"⏳ Waiting for llama-server initialization (Logging to: {self.log_path})...")
@@ -209,18 +209,18 @@ class LlamaCppManager:
         for i in range(15):
             ret_code = self.process.poll()
             if ret_code is not None:
-                logger.error(f"🛑 Il subprocess llama-server è MORTO prematuramente con exit code: {ret_code}")
+                logger.error(f"🛑 The llama-server subprocess DIED prematurely with exit code: {ret_code}")
 
                 if ret_code == -9:
-                    logger.error("💡 Exit code -9: SIGKILL (OOM Killer del kernel per mancanza di VRAM/RAM).")
+                    logger.error("💡 Exit code -9: SIGKILL (Kernel OOM Killer due to lack of VRAM/RAM).")
                 elif ret_code == -11:
                     logger.error("💡 Exit code -11: SIGSEGV (Segmentation Fault).")
                 elif ret_code != 0:
-                    logger.error(f"💡 Exit code anomalo: {ret_code}")
+                    logger.error(f"💡 Anomalous exit code: {ret_code}")
 
                 if os.path.exists(self.log_path):
                     with open(self.log_path, "r") as f:
-                        logger.error(f"📄 Dump completo del log:\n{f.read()}")
+                        logger.error(f"📄 Full log dump:\n{f.read()}")
                 return False
 
             if self.is_running():
@@ -229,24 +229,24 @@ class LlamaCppManager:
             time.sleep(2)
 
         ret_code = self.process.poll()
-        logger.error(f"⏳ Timeout scaduto. Stato corrente del processo (.poll()): {ret_code}")
+        logger.error(f"⏳ Timeout expired. Current process state (.poll()): {ret_code}")
         if os.path.exists(self.log_path):
             with open(self.log_path, "r") as f:
-                logger.error(f"🛑 Ultime righe del log:\n{f.read()[-1500:]}")
+                logger.error(f"🛑 Last lines of the log:\n{f.read()[-1500:]}")
 
         return False
 
     
     def load_model(self, repo_id: str, filename: str, mmproj_filename: Optional[str] = None) -> bool:
         """
-        Scarica i pesi GGUF e l'eventuale file mmproj da Hugging Face,
-        pulisce eventuali istanze precedenti e avvia il servizio con mmproj.
+        Downloads GGUF weights and any optional mmproj file from Hugging Face,
+        cleans up any previous instances, and starts the service with mmproj.
         """
         try:
-            # ✨ Forza la chiusura di qualsiasi server precedente rimasto in memoria
+            # ✨ Force close any previous server left in memory
             self._execute_pure_purge()
 
-            logger.info(f"📥 Download dei pesi da Repo: '{repo_id}' | File: '{filename}'...")
+            logger.info(f"📥 Downloading weights from Repo: '{repo_id}' | File: '{filename}'...")
             model_path = hf_hub_download(
                 repo_id=repo_id,
                 filename=filename,
@@ -255,7 +255,7 @@ class LlamaCppManager:
 
             mmproj_path = None
             if mmproj_filename:
-                logger.info(f"📥 Download del proiettore visivo mmproj: '{mmproj_filename}'...")
+                logger.info(f"📥 Downloading mmproj vision projector: '{mmproj_filename}'...")
                 mmproj_path = hf_hub_download(
                     repo_id=repo_id,
                     filename=mmproj_filename,
@@ -265,5 +265,5 @@ class LlamaCppManager:
             return self.ensure_service(model_path, mmproj_path=mmproj_path)
 
         except Exception as e:
-            logger.error(f"❌ Download o caricamento fallito per '{repo_id}/{filename}': {e}")
+            logger.error(f"❌ Download or loading failed for '{repo_id}/{filename}': {e}")
             return False
