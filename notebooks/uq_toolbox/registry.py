@@ -65,7 +65,7 @@ UQ_REGISTRY = {
             "supported_granularity": ["sequence"],
             "min_required_mode": "white",
             "estimator_class": CocoaMSP,
-            "category": "Information-based",
+            "category": "Sample diversity",
             "compute": "High",
             "memory": "Low",
             "need_training": False,
@@ -75,7 +75,7 @@ UQ_REGISTRY = {
             "supported_granularity": ["sequence"],
             "min_required_mode": "white",
             "estimator_class": CocoaMTE,
-            "category": "Information-based",
+            "category": "Sample diversity",
             "compute": "High",
             "memory": "Low",
             "need_training": False,
@@ -85,7 +85,7 @@ UQ_REGISTRY = {
             "supported_granularity": ["sequence"],
             "min_required_mode": "white",
             "estimator_class": CocoaPPL,
-            "category": "Information-based",
+            "category": "Sample diversity",
             "compute": "High",
             "memory": "Low",
             "need_training": False,
@@ -130,16 +130,6 @@ UQ_REGISTRY = {
             "memory": "Low",
             "need_training": False,
             "description": "Quantifies sequence-level semantic uncertainty by computing the von Neumann entropy of kernels derived from pairwise semantic similarities between generations, offering a more fine-grained and expressive measure than cluster-based semantic entropy. [Reference: https://arxiv.org/pdf/2405.20003]"
-        },
-        "EigLaplacian": {
-            "supported_granularity": ["sequence"],
-            "min_required_mode": "black",
-            "estimator_class": EigValLaplacian,
-            "category": "Sample diversity",
-            "compute": "High",
-            "memory": "Low",
-            "need_training": False,
-            "description": "Estimates uncertainty via the eigenvalues of the graph Laplacian built from pairwise NLI-entailment similarity between sampled responses, capturing the dispersion of the response manifold. [Reference: https://openreview.net/forum?id=Zj12nzlQbz]"
         },
         "LabelProb": {
             "supported_granularity": ["sequence"],
@@ -211,16 +201,6 @@ UQ_REGISTRY = {
             "need_training": False,
             "description": "Estimates token-level uncertainty by directly retrieving the log-probability of the generated token from the model's output distribution; represents a fundamental white-box feature of autoregressive language models."
         },
-        "MonteCarloSequenceEntropy": {
-            "supported_granularity": ["sequence"],
-            "min_required_mode": "white",
-            "estimator_class": MonteCarloSequenceEntropy,
-            "category": "Sample diversity",
-            "compute": "Medium",
-            "memory": "Low",
-            "need_training": False,
-            "description": "Estimates sequence-level predictive entropy via Monte-Carlo sampling, averaging the negative log-probability of several sampled generations to capture the model's uncertainty across the generation manifold. [Reference: https://arxiv.org/abs/2302.09664]"
-        },
         "NumSemSets": {
             "supported_granularity": ["sequence"],
             "min_required_mode": "black",
@@ -281,16 +261,6 @@ UQ_REGISTRY = {
             "need_training": True,
             "description": "Computes a contrastive OOD score by subtracting the Mahalanobis distance of a background distribution from the in-domain Mahalanobis distance, effectively normalizing for layer-specific variance. [Reference: Ren et al. (2023), https://doi.org/10.48550/arXiv.2209.15558]"
         },
-        "RenyiNeg": {
-            "supported_granularity": ["sequence"],
-            "min_required_mode": "white",
-            "estimator_class": RenyiNeg,
-            "category": "Information-based",
-            "compute": "Low",
-            "memory": "Low",
-            "need_training": False,
-            "description": "Quantifies sequence-level uncertainty via the Rényi divergence between each token's predicted distribution and the uniform distribution, offering an information-theoretic alternative to entropy-based confidence. [Reference: https://arxiv.org/pdf/2212.09171.pdf]"
-        },
         "SelfCertainty": {
             "supported_granularity": ["sequence"],
             "min_required_mode": "white",
@@ -301,7 +271,7 @@ UQ_REGISTRY = {
             "need_training": False,
             "description": "Quantifies confidence by measuring the KL-divergence between the predicted token distribution and a uniform distribution at each generation step, indicating prediction peakedness. [Reference: Kang et al. (2025), https://doi.org/10.48550/arXiv.2502.18581]"
         },
-        "Verbalized1s": {
+        "Verbalized1S": {
             "supported_granularity": ["sequence"],
             "min_required_mode": "black",
             "estimator_class": Verbalized1S,
@@ -325,7 +295,7 @@ UQ_REGISTRY = {
             "supported_granularity": ["sequence"],
             "min_required_mode": "white",
             "estimator_class": SemanticEntropy,
-            "category": "Information-based",
+            "category": "Sample diversity",
             "compute": "High",
             "memory": "Low",
             "need_training": False,
@@ -371,31 +341,11 @@ UQ_REGISTRY = {
             "need_training": False,
             "description": "Estimates sequence informativeness and relevance by computing the arithmetic mean of token-level Pointwise Mutual Information (PMI) scores between input and output. [Reference: Takayama & Arase (2019), https://aclanthology.org/W19-4115/]"
         },
-        "SemanticDensity": {
-            "supported_granularity": ["sequence"],
-            "min_required_mode": "white",
-            "estimator_class": SemanticDensity,
-            "category": "Sample diversity",
-            "compute": "High",
-            "memory": "Low",
-            "need_training": False,
-            "description": "Approximates a probability density function in semantic space by combining NLI-based semantic similarity across sampled generations with token-probability weighting, using the model's internal logits to prioritize regions of likely correctness. [Reference: https://arxiv.org/abs/2405.13845]"
-        },
-        "SAR": {
-            "supported_granularity": ["sequence"],
-            "min_required_mode": "white",
-            "estimator_class": SAR,
-            "category": "Sample diversity",
-            "compute": "High",
-            "memory": "Low",
-            "need_training": False,
-            "description": "Shifting Attention to Relevance (SAR): reweights token- and sample-level uncertainty by how semantically relevant each token/sample is to the overall meaning, reducing the influence of irrelevant tokens on the final score. [Reference: https://doi.org/10.48550/arXiv.2307.01379]"
-        },
         "SentSAR": {
-            "supported_grammar": ["sequence"],
+            "supported_granularity": ["sequence"],
             "min_required_mode": "white",
             "estimator_class": SentenceSAR,
-            "category": "Information-based",
+            "category": "Sample diversity",
             "compute": "Low",
             "memory": "Low",
             "need_training": False,
@@ -529,7 +479,7 @@ UQ_REGISTRY = {
             "supported_granularity": ["sequence"],
             "min_required_mode": "white",
             "wrapper_class": WhiteBoxUQ,
-            "category": "Information-based",
+            "category": "Sample diversity",
             "compute": "Medium",
             "memory": "Low",
             "need_training": False,
@@ -540,7 +490,7 @@ UQ_REGISTRY = {
             "supported_granularity": ["sequence"],
             "min_required_mode": "white",
             "wrapper_class": WhiteBoxUQ,
-            "category": "Information-based",
+            "category": "Sample diversity",
             "compute": "Medium",
             "memory": "Low",
             "need_training": False,
@@ -562,7 +512,7 @@ UQ_REGISTRY = {
             "supported_granularity": ["sequence"],
             "min_required_mode": "white",
             "wrapper_class": WhiteBoxUQ,
-            "category": "Consistency-based",
+            "category": "Sample diversity",
             "compute": "Medium",
             "memory": "Medium",
             "need_training": False,
@@ -604,11 +554,10 @@ def list_uq_techniques(
 ):
     """
     Query interface for uncertainty techniques. 
-    Filters and displays the registry contents including descriptions.
+    Filters and displays the registry contents including descriptions and supported granularities.
     """
     print("\n🔍 UQ FRAMEWORK CORE ENGINE - METHOD TAXONOMY AND HARDWARE COST ANALYSIS")
 
-    # Extended separator line to accommodate the description column
     separator = "=" * 160
     header = f"{'TECHNIQUE':<35} | {'LIBRARY':<12} | {'MODE':<6} | {'CATEGORY':<20} | {'TRAIN':<5} | {'COMPUTE':<8} | {'DESCRIPTION'}"
 
@@ -628,13 +577,24 @@ def list_uq_techniques(
             train = "Yes" if info.get("need_training", False) else "No"
             desc = info.get("description", "No description available.")
             
-            # --- Filters ---
-            if mode and req_mode.lower() != mode.lower(): continue
-            if compute and comp.lower() != compute.lower(): continue
-            if need_training is not None and info.get("need_training", False) != need_training: continue
-            if category and category.lower() not in cat.lower(): continue
-            
-            # Print row including the description
+            # --- Filtri ---
+            if mode and req_mode.lower() != mode.lower(): 
+                continue
+            if compute and comp.lower() != compute.lower(): 
+                continue
+            if need_training is not None and info.get("need_training", False) != need_training: 
+                continue
+            if category and category.lower() not in cat.lower(): 
+                continue
+                
+            # ✨ Gestione corretta di supported_granularity (che è una lista)
+            if granularity:
+                supported_list = info.get("supported_granularity", [])            
+                
+                if not any(granularity.lower() in g.lower() for g in supported_list):
+                    continue
+
+            # Stampa riga con inclusione della descrizione
             print(f"{tech_name:<35} | {lib_enum.value:<12} | {req_mode:<6} | {cat:<20} | {train:<5} | {comp:<8} | {desc}")
             count += 1
 

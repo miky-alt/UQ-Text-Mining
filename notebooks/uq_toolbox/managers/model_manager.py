@@ -7,10 +7,10 @@ from typing import Optional, Union, Any, Dict, List
 
 # --- Third-Party / ML Libraries ---
 from transformers import (
-    AutoModelForCausalLM, 
-    AutoTokenizer, 
-    AutoProcessor, 
-    AutoModelForImageTextToText, 
+    AutoModelForCausalLM,
+    AutoTokenizer,
+    AutoProcessor,
+    AutoModelForImageTextToText,
     BitsAndBytesConfig
 )
 
@@ -168,6 +168,7 @@ class UQModelManager:
                        auto_install: bool = False,
                        repo_id: Optional[str] = None,
                        filename: Optional[str] = None,
+                       mmproj_filename: Optional[str] = None, # ✨ Aggiunto qui
                        **uqlm_kwargs):
         """Adds a LangChain LLM to the registry with independent box mode mapping."""
         current_mode = mode.strip().lower() if mode else self.default_uqlm_mode
@@ -194,13 +195,13 @@ class UQModelManager:
                 os.environ["OPENAI_API_KEY"] = getpass.getpass("Paste your OpenAI Key: ")
             openai_kwargs = {"logprobs": True} if current_mode == "white" else {}
             self.langchain_llms[alias] = ChatOpenAI(model=model_id, temperature=temperature, max_tokens=max_tokens, model_kwargs=openai_kwargs, **uqlm_kwargs)
-        
+
         # Handle Google Provider
         elif provider == "google":
             if "GOOGLE_API_KEY" not in os.environ:
                 os.environ["GOOGLE_API_KEY"] = getpass.getpass("Paste your Google Key: ")
             self.langchain_llms[alias] = ChatGoogleGenerativeAI(model=model_id, temperature=temperature, max_tokens=max_tokens, **uqlm_kwargs)
-        
+
         # Handle Anthropic Provider
         elif provider == "anthropic":
             if "ANTHROPIC_API_KEY" not in os.environ:
@@ -209,26 +210,23 @@ class UQModelManager:
 
         # Handle LlamaCpp/Local Provider (Self-healing orchestration)
         elif provider == "llamacpp":
-            print(f"\n📊 Initializing LlamaCpp for [{alias.upper()}]...")
-            
-            # Explicit resolution of repo_id and filename
+            print(f"\n📊 Inizializzazione LlamaCpp per [{alias.upper()}]...")
+
             target_repo = repo_id or model_id
             target_file = filename or (f"{model_id}.gguf" if model_id and not model_id.endswith(".gguf") else model_id)
+            target_mmproj = mmproj_filename or uqlm_kwargs.pop("mmproj_filename", None) # ✨ Cattura corretta
 
             if not target_repo or not target_file:
-                raise ValueError(f"For 'llamacpp' provider, both 'repo_id' and 'filename' must be specified for alias '{alias}'.")
+                raise ValueError(f"Per il provider 'llamacpp' servono 'repo_id' e 'filename' per l'alias '{alias}'.")
 
-            # Use LlamaCppManager for binary installation and service lifecycle
             manager = LlamaCppManager(base_url=ollama_url)
 
-            # Ensure model is ready passing explicit repo_id and filename
-            if not manager.load_model(repo_id=target_repo, filename=target_file):
-                print(f"❌ Aborting allocation for alias [{alias.upper()}]: Service failed.")
+            if not manager.load_model(repo_id=target_repo, filename=target_file, mmproj_filename=target_mmproj):
+                print(f"❌ Allocazione fallita per [{alias.upper()}]: Servizio non avviato.")
                 return
 
-            # Map to ChatOpenAI interface for compatibility with logprobs (White-box usage)
             model_kwargs = {"logprobs": True} if current_mode == "white" else {}
-            
+
             self.langchain_llms[alias] = ChatOpenAI(
                 base_url=f"{manager.base_url}/v1",
                 api_key="llama-cpp-local",
@@ -238,24 +236,7 @@ class UQModelManager:
                 model_kwargs=model_kwargs,
                 **uqlm_kwargs
             )
-            print(f"🔗 LlamaCpp instance active at {manager.base_url}/v1")
-
-        # Handle Ollama Provider
-        elif provider == "ollama":
-            self.langchain_llms[alias] = ChatOllama(
-                base_url=ollama_url,
-                model=model_id,
-                temperature=temperature,
-                num_predict=max_tokens,
-                logprobs=True if current_mode == "white" else None,
-                **uqlm_kwargs,
-            )
-
-        else:
-            raise ValueError(
-                f"Unknown UQLM provider '{provider}' for alias '{alias}'. "
-                "Supported providers: custom, openai, google, anthropic, llamacpp, ollama."
-            )
+            print(f"🔗 Istanza LlamaCpp attiva su {manager.base_url}/v1")
 
     def remove_models(self, aliases: Optional[Union[list[str], str]] = None) -> None:
         """
@@ -387,8 +368,9 @@ def initialize_uq_models(
             max_tokens=config.get("max_tokens", max_tokens),
             ollama_url=ollama_url,
             auto_install=config.get("auto_install", auto_install),
-            repo_id=config.get("repo_id"),       # extracted from config
-            filename=config.get("filename"),     # extracted from config
+            repo_id=config.get("repo_id"),          
+            filename=config.get("filename"),        
+            mmproj_filename=config.get("mmproj_filename"), # ✨ Aggiunto: inoltra il file proiettore
             **merged_kwargs
         )
 
