@@ -435,8 +435,8 @@ UQ_REGISTRY = {
             "supported_granularity": ["sequence"],
             "min_required_mode": "white",
             "wrapper_class": WhiteBoxUQ,
-            "category": "Information-based", # Corretto da 'Sample diversity' a 'Information-based' per coerenza con l'uso dei logit
-            "compute": "High", # Richiede comunque estrazione logit e calcolo su più campioni
+            "category": "Information-based", 
+            "compute": "High",
             "memory": "Low",
             "need_training": False,
             "description": "Quantifies uncertainty by utilizing the LLM's internal token-level logit distributions to weight semantic meaning estimates. This white-box approach improves upon naive entropy by conditioning the certainty assessment directly on the model's internal predictive distribution, providing a more granular signal than black-box sampling alone. [Reference: Farquhar et al. (2024), https://doi.org/10.1038/s41586-024-07421-0]"
@@ -446,7 +446,7 @@ UQ_REGISTRY = {
             "supported_granularity": ["sequence"],
             "min_required_mode": "black",
             "wrapper_class": BlackBoxUQ,
-            "category": "Information-based",
+            "category": "Sample diversity",
             "compute": "High",
             "memory": "Low",
             "need_training": False,
