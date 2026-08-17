@@ -171,7 +171,7 @@ async def compute_dataset_uq_scores(
             generated_text = str(result.get("generated_text", "No response")).strip()
 
             # Compute quality using the injected evaluator polymorphically
-            is_correct = evaluator(
+            is_correct = await evaluator(
                 prompt=prompt_input,
                 generated_text=generated_text,
                 ground_truth=true_answer
@@ -289,7 +289,7 @@ async def compute_batch_uqlm_scores(
                 meta = batch_metadata[i]
 
                 # Valutazione della correttezza
-                is_correct = evaluator(
+                is_correct = await evaluator(
                     prompt=batch_prompts[i],
                     generated_text=generated_text,
                     ground_truth=meta["true_answer"]
