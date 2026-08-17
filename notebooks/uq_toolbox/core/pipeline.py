@@ -47,7 +47,6 @@ class UQResultContainer(dict):
             if isinstance(value, dict) and "scores" in value:
                 result_data[key] = value["scores"]
             else:
-                # Preserva i metadati globali richiesti da uqlm (es. 'responses', 'qualities')
                 result_data[key] = value
         return result_data
 
@@ -84,7 +83,7 @@ def _archive_metrics(
     response: str,
     question: str,
     ground_truth: str,
-    uqlm_result: UQResult
+    uqlm_result: Optional[Any] = None  #
 ) -> None:
     """Helper to archive extracted metrics into the provided registry."""
     registry[tech]["scores"].append(score)
@@ -93,8 +92,12 @@ def _archive_metrics(
     registry[tech]["responses"].append(response)
     registry[tech]["questions"].append(question)
     registry[tech]["ground_truths"].append(ground_truth)
-    if uqlm_result is not None:
-        registry[tech]["uqlm_result"].append(uqlm_result)
+    
+    if uqlm_result is not None and "uqlm_result" in registry[tech]:
+        if isinstance(registry[tech]["uqlm_result"], list):
+            registry[tech]["uqlm_result"].append(uqlm_result)
+        else:
+            registry[tech]["uqlm_result"] = uqlm_result
 
 
 
